@@ -1,6 +1,32 @@
-﻿@{
+﻿@model Lab11._2_Coffee_Shop_Registration.Models.WebUser
+
+@{
     ViewBag.Title = "Welcome";
 }
-<h3>@ViewBag.Message</h3>
 
-<p>Thank you for your registration! We will contact you shortly</p>
+Please confirm the following information:<br/>
+    <table>
+        <tr>
+            <td>Username:</td>
+            <td>@Model.Username</td>
+        </tr>
+        <tr>
+            <td>First Name:</td>
+            <td>@Model.FirstName</td>
+        </tr>
+        <tr>
+            <td>Last Name:</td>
+            <td>@Model.LastName</td>
+        </tr>
+        <tr>
+            <td>Email Address:</td>
+           <td>@Model.Email</td>
+        </tr>
+        <tr>
+            <td>Phone Number:</td>
+            <td>@Model.PhoneNumber</td>
+        </tr>
+    </table>
+<br/><br/>
+<p>If this information is incorrect, please resubmit the registration form <a href="/home/registration">Here</a></p>
+<p>If this information is correct you may proceed to the order page found <a href="/home/OrderPage">Here</a></p>

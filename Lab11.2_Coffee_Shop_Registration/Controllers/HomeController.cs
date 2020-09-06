@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Text.RegularExpressions;
 using System.Net.Mail;
+using Lab11._2_Coffee_Shop_Registration.Models;
 
 
 namespace Lab11._2_Coffee_Shop_Registration.Controllers
@@ -23,7 +24,34 @@ namespace Lab11._2_Coffee_Shop_Registration.Controllers
             return View();
         }
 
-        public ActionResult Welcome(string firstname, string lastname, string password, string emailaddress, string phonenumber)
+        public ActionResult OrderPage(string firstname)
+        {
+            WebUser orderPage = new WebUser()
+            {
+                FirstName = firstname
+            };
+            return View(orderPage);
+        }
+
+        [HttpPost]
+        public ActionResult OrderConfirmation(string drink, string size, string getDrink, string firstname)
+        {
+            WebUser drinkOrder = new WebUser()
+            {
+                Drink = drink,
+                Size = size,
+                GetDrink = getDrink,
+                FirstName = firstname
+            };
+
+            Random orderNumber = new Random();
+            ViewBag.OrderNumber = orderNumber.Next();
+
+            return View(drinkOrder);
+        }
+
+        [HttpPost] //using post means we cannot "get" the page
+        public ActionResult Welcome(string firstname, string lastname, string password, string emailaddress, string phonenumber, string username)
         {            
             var hasNumber = new Regex(@"[0-9]+");
             var hasUpperChar = new Regex(@"[A-Z]+");
@@ -31,47 +59,33 @@ namespace Lab11._2_Coffee_Shop_Registration.Controllers
             var phoneNumberValidation = new Regex(@"\(?\d{3}\)?-? *\d{3}-? *-?\d{4}");
 
             bool isValidated = hasNumber.IsMatch(password) && hasUpperChar.IsMatch(password) && hasMinimum8Chars.IsMatch(password);
-
             bool emailIsValid;
-
             bool phoneNumberIsValid = phoneNumberValidation.IsMatch(phonenumber);
-            
-                try
-                {
-                    MailAddress m = new MailAddress(emailaddress);
 
-                    emailIsValid=true;
-                }
-                catch (FormatException)
-                {
-                    emailIsValid=false;
-                }
+            WebUser user = new WebUser()
+            {
+                Username = username,
+                Email = emailaddress,
+                FirstName = firstname,
+                LastName = lastname,
+                PhoneNumber = phonenumber,
+                Password = password
+            };
+            
+            try
+            {
+                MailAddress m = new MailAddress(emailaddress);
+
+                emailIsValid=true;
+            }
+            catch (FormatException)
+            {
+                emailIsValid=false;
+            }
             
             if (isValidated && emailIsValid && phoneNumberIsValid)
-            {
-                ViewBag.Message = $"Welcome {firstname} {lastname}!";
-                /*
-                string to = emailaddress;
-                string from = "xweekax@gmail.com.com";
-                MailMessage message = new MailMessage(from, to);
-                message.Subject = "Big Bean Coffee!";
-                message.Body = $"Welcome to Big Bean Coffee {firstname} {lastname}! Please verify the following:" +
-                    $"phone number: {phonenumber}" +
-                    $"password: {password}";
-                SmtpClient client = new SmtpClient();
-                client.UseDefaultCredentials = true;
-
-                try
-                {
-                    client.Send(message);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Exception caught in CreateTestMessage2(): {0}",
-                        ex.ToString());
-                }
-                */
-                return View();
+            {                
+                return View(user);
             }
             else if(!isValidated)
             {

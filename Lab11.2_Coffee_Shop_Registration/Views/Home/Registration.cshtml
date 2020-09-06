@@ -3,7 +3,7 @@
 }
 <h2>@ViewBag.Title.</h2>
 
-<form action=" /home/welcome">
+<form method="post" action=" /home/OrderPage"> 
     <table>
         <tr>
             <td>First Name:</td>
@@ -15,11 +15,15 @@
         </tr>
         <tr>
             <td>Email Address:</td>
-            <td><input type="text" name="emailaddress"></td>
+            <td><input type="email" name="emailaddress"></td>
         </tr>
         <tr>
             <td>Phone Number:</td>
             <td><input type="text" name="phonenumber"></td>
+        </tr>
+        <tr>
+            <td>Username:</td>
+            <td><input type="text" name="username"></td>
         </tr>
         <tr>
             <td>Password:</td>

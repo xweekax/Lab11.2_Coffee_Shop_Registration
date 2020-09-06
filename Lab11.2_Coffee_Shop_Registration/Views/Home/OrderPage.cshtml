@@ -1,0 +1,35 @@
+﻿@model Lab11._2_Coffee_Shop_Registration.Models.WebUser
+@{
+    ViewBag.Title = "OrderPage";
+}
+
+<h2>The Big Bean - @Model.FirstName's Order</h2>
+
+<br />
+
+<form method="post" action=" /home/OrderConfirmation">
+    <label for="Drink">Choose a Drink:</label>
+
+    <select name="Drink" id="Drink">
+        <option value="blackcoffee">Black Coffee</option>
+        <option value="greentea">Green Tea</option>
+        <option value="blacktea">Black Tea</option>
+        <option value="water">Water</option>
+    </select>
+    <br />
+    <label for="Drinks">Choose a Drink:</label>
+
+    <select name="Size" id="Size">
+        <option value="small">Small</option>
+        <option value="medium">Medium</option>
+        <option value="large">Large</option>
+        <option value="bigbean">Big Bean</option>
+    </select>
+    <br />
+    <input type="radio" id="pickup" name="getDrink" value="pickup" />
+    <label for="pickup">Pickup</label>
+    <input type="radio" id="delivery" name="getDrink" value="delivery" />
+    <label for="delvery">Delivery</label>
+    <br />
+    <input type="submit" value="submit" />
+</form>

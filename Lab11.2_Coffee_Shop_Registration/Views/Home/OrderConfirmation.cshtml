@@ -1,0 +1,16 @@
+﻿@model Lab11._2_Coffee_Shop_Registration.Models.WebUser
+@{
+    ViewBag.Title = "OrderConfirmation";
+}
+
+<h2>Order # @ViewBag.OrderNumber</h2>
+
+
+<p>Thank you @Model.FirstName please confirm your drink order below </p>
+
+<h4>Beverage:</h4> @Model.Drink
+<br />
+<h4>size:</h4> @Model.Size
+<br />
+<h4>Pickup/Delivery:</h4> @Model.GetDrink
+<br />
