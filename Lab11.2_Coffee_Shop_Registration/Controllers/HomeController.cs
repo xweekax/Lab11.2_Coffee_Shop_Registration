@@ -23,25 +23,34 @@ namespace Lab11._2_Coffee_Shop_Registration.Controllers
 
             return View();
         }
-
-        public ActionResult OrderPage(string firstname)
+        /*
+        public ActionResult OrderPage(string firstname, string stAddress, string city, string zipCode, string selectTime)
         {
             WebUser orderPage = new WebUser()
             {
-                FirstName = firstname
+                FirstName = firstname,
+                StAddress = stAddress,
+                City = city,
+                ZipCode = zipCode,
+                SelectTime = selectTime
+
             };
             return View(orderPage);
         }
-
+        */
         [HttpPost]
-        public ActionResult OrderConfirmation(string drink, string size, string getDrink, string firstname)
+        public ActionResult OrderConfirmation(string drink, string size, string getDrink, string firstname, string stAddress, string city, string zipCode, string selectTime)
         {
             WebUser drinkOrder = new WebUser()
             {
                 Drink = drink,
                 Size = size,
                 GetDrink = getDrink,
-                FirstName = firstname
+                FirstName = firstname,
+                StAddress = stAddress,
+                City = city,
+                ZipCode = zipCode,
+                SelectTime = selectTime
             };
 
             Random orderNumber = new Random();
@@ -51,7 +60,7 @@ namespace Lab11._2_Coffee_Shop_Registration.Controllers
         }
 
         [HttpPost] //using post means we cannot "get" the page
-        public ActionResult Welcome(string firstname, string lastname, string password, string emailaddress, string phonenumber, string username)
+        public ActionResult OrderPage(string firstname, string lastname, string password, string emailaddress, string phonenumber, string username, string stAddress, string city, string zipCode, string selectTime)
         {            
             var hasNumber = new Regex(@"[0-9]+");
             var hasUpperChar = new Regex(@"[A-Z]+");
@@ -69,7 +78,10 @@ namespace Lab11._2_Coffee_Shop_Registration.Controllers
                 FirstName = firstname,
                 LastName = lastname,
                 PhoneNumber = phonenumber,
-                Password = password
+                Password = password,
+                City = city,
+                ZipCode = zipCode,
+                SelectTime = selectTime
             };
             
             try

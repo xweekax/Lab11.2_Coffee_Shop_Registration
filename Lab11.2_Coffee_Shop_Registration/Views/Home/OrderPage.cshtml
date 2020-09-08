@@ -3,11 +3,28 @@
     ViewBag.Title = "OrderPage";
 }
 
+<script>
+    function pickupTime()
+    {
+        if (document.getElementById('pickup').checked)
+        {
+            document.getElementById('time').style = 'visibility:visible';
+            document.getElementById('address').style = 'visibility:hidden';
+        }
+        else if (document.getElementById('delivery').checked)
+        {
+            document.getElementById('time').style = 'visibility:hidden';
+            document.getElementById('address').style = 'visibility:visible';
+        }
+        return;
+    }
+</script>
+
 <h2>The Big Bean - @Model.FirstName's Order</h2>
 
 <br />
 
-<form method="post" action=" /home/OrderConfirmation">
+<form method="post" action=" /home/OrderConfirmation" name="orderDrink">
     <label for="Drink">Choose a Drink:</label>
 
     <select name="Drink" id="Drink">
@@ -26,10 +43,25 @@
         <option value="bigbean">Big Bean</option>
     </select>
     <br />
-    <input type="radio" id="pickup" name="getDrink" value="pickup" />
+    <input type="radio" id="pickup" name="getDrink" value="pickup" onclick="pickupTime()" />
     <label for="pickup">Pickup</label>
-    <input type="radio" id="delivery" name="getDrink" value="delivery" />
+
+    <div id="time" style="visibility:hidden">
+        <label for="selectTime">Pickup Time</label>
+        <input type="time" name="selectTime" />
+    </div>
+
+    <input type="radio" id="delivery" name="getDrink" value="delivery" onclick="pickupTime()" />
     <label for="delvery">Delivery</label>
+
+    <div id="address" style="visibility:hidden">
+        <label for="setAddress">Delivery Address:</label><br />
+        <input type="text" name="stAddress" placeholder="Street #" /><br />
+        <input type="text" name="city" placeholder="City" /><br />
+        <input type="text" name="zipCode" placeholder="Zip Code" /><br />
+    </div>
+
     <br />
     <input type="submit" value="submit" />
 </form>
+

@@ -3,6 +3,12 @@
     ViewBag.Title = "OrderConfirmation";
 }
 
+<script>
+
+
+
+</script>
+
 <h2>Order # @ViewBag.OrderNumber</h2>
 
 
@@ -14,3 +20,6 @@
 <br />
 <h4>Pickup/Delivery:</h4> @Model.GetDrink
 <br />
+@Model.SelectTime
+@Model.StAddress<br/>
+@Model.City @Model.ZipCode

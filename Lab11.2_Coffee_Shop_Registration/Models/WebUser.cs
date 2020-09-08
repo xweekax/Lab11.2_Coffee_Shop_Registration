@@ -16,6 +16,10 @@ namespace Lab11._2_Coffee_Shop_Registration.Models
         public string Drink { get; set; }
         public string Size { get; set; }
         public string GetDrink { get; set; }
+        public string StAddress { get; set; }
+        public string City { get; set; }
+        public string ZipCode { get; set; }
+        public string SelectTime { get; set; }
 
     }
 
